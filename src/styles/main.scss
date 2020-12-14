@@ -1,3 +1,5 @@
+@import './countries';
+
 .main {
   display: grid;
   grid-template-areas: 
@@ -18,8 +20,9 @@
   background-color: red;
 }
 .countries {
+  height: 700px;
   grid-area: c;
-  background-color: green;
+  overflow: scroll;
 }
 .map {
   grid-area: m;
