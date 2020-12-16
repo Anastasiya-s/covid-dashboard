@@ -1,4 +1,4 @@
-import { fetchAllCountries } from '../../api/covid';
+// import { fetchAllCountries } from '../../api/covid';
 
 const container = document.querySelector('.countries');
 const title = document.createElement('h4');
@@ -7,16 +7,18 @@ const list = document.createElement('ul');
 container.append(title);
 container.append(list);
 
-let countriesList = [];
-const handleRenderingAllCountriesList = () => {
-  fetch(fetchAllCountries).then((response) => response.json()).then((data) => {
-    countriesList = data.map((item) => item);
-    countriesList.map((item) => {
-      const country = document.createElement('li');
-      country.innerText = item.Country;
-      list.append(country);
-      return item;
-    });
+const handleRenderingAllCountriesList = (countriesList, countriesActiveProp) => {
+  const countries = countriesList;
+  countries.forEach((item) => {
+    const key = item.country;
+    const value = item[countriesActiveProp];
+    const countryContainer = document.createElement('li');
+    const keySpan = document.createElement('span');
+    keySpan.innerText = key;
+    const valueSpan = document.createElement('span');
+    valueSpan.innerText = value;
+    countryContainer.append(keySpan, valueSpan);
+    list.append(countryContainer);
   });
 };
 
