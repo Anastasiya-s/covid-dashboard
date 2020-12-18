@@ -1,14 +1,18 @@
-// import { fetchAllCountries } from '../../api/covid';
+import buttonsPanel from './buttonsPanel';
 
 const container = document.querySelector('.countries');
 const title = document.createElement('h4');
 title.innerText = 'Countries';
 const list = document.createElement('ul');
-container.append(title);
-container.append(list);
+const panel = buttonsPanel();
+container.append(title, list);
+container.insertAdjacentHTML('afterbegin', panel);
 
 const handleRenderingAllCountriesList = (countriesList, countriesActiveProp) => {
   const countries = countriesList;
+  while (list.hasChildNodes()) {
+    list.removeChild(list.lastChild);
+  }
   countries.forEach((item) => {
     const key = item.country;
     const value = item[countriesActiveProp];

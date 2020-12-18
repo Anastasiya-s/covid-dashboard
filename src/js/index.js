@@ -4,7 +4,7 @@ import { fetchSummary } from '../api/covid';
 import handleRenderingAllCountriesList from './countries-list/countriesList';
 
 let countriesList = [];
-const countriesActiveProp = 'totalConfirmed';
+let countriesActiveProp = 'totalConfirmed';
 
 const sortCountriesByParam = (field) => function innerSort(a, b) {
   let compareResult = null;
@@ -20,31 +20,44 @@ const sortCountriesByParam = (field) => function innerSort(a, b) {
   return compareResult;
 };
 
-fetch(fetchSummary).then((response) => response.json()).then((data) => {
-  countriesList = data.Countries.map(({
-    Country,
-    Slug,
-    CountryCode,
-    NewConfirmed,
-    NewDeaths,
-    NewRecovered,
-    TotalConfirmed,
-    TotalDeaths,
-    TotalRecovered,
-  }) => {
-    const item = {};
-    item.country = Country;
-    item.slug = Slug;
-    item.countryCode = CountryCode;
-    item.newConfirmed = NewConfirmed;
-    item.newDeaths = NewDeaths;
-    item.newRecovered = NewRecovered;
-    item.totalConfirmed = TotalConfirmed;
-    item.totalDeaths = TotalDeaths;
-    item.totalRecovered = TotalRecovered;
-    return item;
+const handleFetchingData = (currentParam) => {
+  const param = currentParam;
+  fetch(fetchSummary).then((response) => response.json()).then((data) => {
+    countriesList = data.Countries.map(({
+      Country,
+      Slug,
+      CountryCode,
+      NewConfirmed,
+      NewDeaths,
+      NewRecovered,
+      TotalConfirmed,
+      TotalDeaths,
+      TotalRecovered,
+    }) => {
+      const item = {};
+      item.country = Country;
+      item.slug = Slug;
+      item.countryCode = CountryCode;
+      item.newConfirmed = NewConfirmed;
+      item.newDeaths = NewDeaths;
+      item.newRecovered = NewRecovered;
+      item.totalConfirmed = TotalConfirmed;
+      item.totalDeaths = TotalDeaths;
+      item.totalRecovered = TotalRecovered;
+      return item;
+    });
+    countriesList.sort(sortCountriesByParam(param));
+    handleRenderingAllCountriesList(countriesList, param);
+    return countriesList;
   });
-  countriesList.sort(sortCountriesByParam(countriesActiveProp));
-  handleRenderingAllCountriesList(countriesList, countriesActiveProp);
-  return countriesList;
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const dataParams = document.querySelectorAll('.data-panel');
+
+  handleFetchingData(countriesActiveProp);
+  dataParams.forEach((item) => item.addEventListener('click', (e) => {
+    countriesActiveProp = e.target.dataset.info;
+    handleFetchingData(countriesActiveProp);
+  }));
 });
