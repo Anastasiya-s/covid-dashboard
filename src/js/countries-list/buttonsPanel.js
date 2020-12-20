@@ -17,8 +17,8 @@ const buttonsPanel = () => `
       </ul>
     </div>
     <ul>
-      <li><button data-stats="absolute">Total</button></li>
-      <li><button data-stats="perThousand">per 100 000</button></li>
+      <li><button class="absolute">Total</button></li>
+      <li><button class="relative">per 100 000</button></li>
     </ul>
   </div>
 `;
