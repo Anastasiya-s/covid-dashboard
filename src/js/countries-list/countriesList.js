@@ -8,7 +8,7 @@ const panel = buttonsPanel();
 container.append(title, list);
 container.insertAdjacentHTML('afterbegin', panel);
 
-const handleRenderingAllCountriesList = (countriesList, countriesActiveProp) => {
+const handleRenderingAllCountriesList = (countriesList, countriesActiveProp, details) => {
   const countries = countriesList;
   while (list.hasChildNodes()) {
     list.removeChild(list.lastChild);
@@ -16,6 +16,10 @@ const handleRenderingAllCountriesList = (countriesList, countriesActiveProp) => 
   countries.forEach((item) => {
     const key = item.country;
     const value = item[countriesActiveProp];
+    const index = details.indexOf(key);
+    const currentDetail = details[index];
+    const flagImg = currentDetail.flag;
+    console.log(flagImg);
     const countryContainer = document.createElement('li');
     const keySpan = document.createElement('span');
     keySpan.innerText = key;
