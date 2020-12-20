@@ -16,16 +16,22 @@ const handleRenderingAllCountriesList = (countriesList, countriesActiveProp, det
   countries.forEach((item) => {
     const key = item.country;
     const value = item[countriesActiveProp];
-    const index = details.indexOf(key);
+    const index = details.findIndex((i) => i.name === key);
     const currentDetail = details[index];
-    const flagImg = currentDetail.flag;
-    console.log(flagImg);
+    const flagImg = currentDetail ? currentDetail.flag : null;
     const countryContainer = document.createElement('li');
     const keySpan = document.createElement('span');
     keySpan.innerText = key;
+    const flagSpan = document.createElement('img');
+    flagSpan.classList.add('flag-icon');
+    flagSpan.src = flagImg;
     const valueSpan = document.createElement('span');
     valueSpan.innerText = value;
-    countryContainer.append(keySpan, valueSpan);
+    if (flagImg) {
+      countryContainer.append(keySpan, flagSpan, valueSpan);
+    } else {
+      countryContainer.append(keySpan, valueSpan);
+    }
     list.append(countryContainer);
   });
 };
