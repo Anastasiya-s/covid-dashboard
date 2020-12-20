@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(__dirname, './src/js/index.js'),
+  entry: ['@babel/polyfill', path.resolve(__dirname, './src/js/index.js')],
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: '[name].bundle.js',
@@ -67,5 +67,6 @@ module.exports = {
     open: true,
     compress: true,
     port: 8080,
-  }
+    headers: { 'Access-Control-Allow-Origin': '*' },
+  },
 };
