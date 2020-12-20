@@ -6,6 +6,7 @@ import handleRenderingAllCountriesList from './countries-list/countriesList';
 let countriesList = [];
 let countriesActiveProp = 'totalConfirmed';
 const countriesDetails = [];
+let isRelative = false;
 
 const sortCountriesByParam = (field) => function innerSort(a, b) {
   let compareResult = null;
@@ -20,13 +21,6 @@ const sortCountriesByParam = (field) => function innerSort(a, b) {
   }
   return compareResult;
 };
-
-// const fetchFlagAndPopulation = async () => {
-//   const response = await fetch('https://restcountries.eu/rest/v2/all?fields=name;population;flag');
-//   const data = await response.json();
-//   data.forEach((details) => countriesDetails.push(details));
-//   return countriesDetails;
-// };
 
 const handleFetchingData = async (currentParam) => {
   const param = currentParam;
@@ -59,7 +53,7 @@ const handleFetchingData = async (currentParam) => {
     return item;
   });
   countriesList.sort(sortCountriesByParam(param));
-  handleRenderingAllCountriesList(countriesList, param, countriesDetails);
+  handleRenderingAllCountriesList(countriesList, param, countriesDetails, isRelative);
   return countriesList;
 };
 
@@ -70,4 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
     countriesActiveProp = e.target.dataset.info;
     handleFetchingData(countriesActiveProp);
   }));
+  const relativeButton = document.querySelector('.relative');
+  const absoluteButton = document.querySelector('.absolute');
+  relativeButton.addEventListener('click', () => {
+    isRelative = true;
+    handleFetchingData(countriesActiveProp);
+  });
+  absoluteButton.addEventListener('click', () => {
+    isRelative = false;
+    handleFetchingData(countriesActiveProp);
+  });
 });
