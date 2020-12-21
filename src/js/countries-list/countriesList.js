@@ -10,8 +10,7 @@ container.insertAdjacentHTML('afterbegin', panel);
 
 const handleRenderingAllCountriesList = (
   countriesList,
-  countriesActiveProp,
-  details,
+  param,
   isRelative,
 ) => {
   const countries = countriesList;
@@ -20,15 +19,13 @@ const handleRenderingAllCountriesList = (
   }
   countries.forEach((item) => {
     const key = item.country;
-    const index = details.findIndex((i) => i.name === key);
-    const currentDetail = details[index];
     let value;
-    if (currentDetail) {
+    if (item.population) {
       value = isRelative
-        ? Math.ceil((item[countriesActiveProp] / currentDetail.population) * 100000) || '-'
-        : Math.ceil(item[countriesActiveProp]);
+        ? Math.ceil((item[param] / item.population) * 100000) || '-'
+        : item[param];
     } else value = '-';
-    const flagImg = currentDetail ? currentDetail.flag : null;
+    const flagImg = item.flag || null;
     const countryContainer = document.createElement('li');
     const keySpan = document.createElement('span');
     keySpan.innerText = key;
