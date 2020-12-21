@@ -3,17 +3,17 @@ const buttonsPanel = () => `
     <div>
       <span>Total:</span>
       <ul class="data-panel">
-        <li><button data-info="totalConfirmed">Confirmed</button></li>
-        <li><button data-info="totalDeaths">Deaths</button></li>
-        <li><button data-info="totalRecovered">Recovered</button></li>
+        <li><button data-info="cases">Confirmed</button></li>
+        <li><button data-info="deaths">Deaths</button></li>
+        <li><button data-info="recovered">Recovered</button></li>
       </ul>
     </div>
     <div>
     <span>Today:</span>
       <ul class="data-panel">
-        <li><button data-info="newConfirmed">Confirmed</button></li>
-        <li><button data-info="newDeaths">Deaths</button></li>
-        <li><button data-info="newRecovered">Recovered</button></li>
+        <li><button data-info="todayCases">Confirmed</button></li>
+        <li><button data-info="todayDeaths">Deaths</button></li>
+        <li><button data-info="todayRecovered">Recovered</button></li>
       </ul>
     </div>
     <ul>
