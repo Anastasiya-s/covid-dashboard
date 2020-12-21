@@ -1,59 +1,25 @@
 import '../styles/main.scss';
 
-import { fetchSummary } from '../api/covid';
 import handleRenderingAllCountriesList from './countries-list/countriesList';
 
 let countriesList = [];
-let countriesActiveProp = 'totalConfirmed';
-const countriesDetails = [];
+let countriesActiveProp = 'cases';
 let isRelative = false;
-
-const sortCountriesByParam = (field) => function innerSort(a, b) {
-  let compareResult = null;
-  if (a[field] > b[field]) {
-    compareResult = -1;
-  }
-  if (a[field] < b[field]) {
-    compareResult = 1;
-  }
-  if (a[field] === b[field]) {
-    compareResult = 0;
-  }
-  return compareResult;
-};
 
 const handleFetchingData = async (currentParam) => {
   const param = currentParam;
-  const response = await fetch(fetchSummary);
+  const response = await fetch(`https://disease.sh/v3/covid-19/countries?yesterday=true&sort=${currentParam}&allowNull=true`);
   const data = await response.json();
-  const detailsResponse = await fetch('https://restcountries.eu/rest/v2/all?fields=name;population;flag');
-  const detailsData = await detailsResponse.json();
-  detailsData.forEach((details) => countriesDetails.push(details));
-  countriesList = data.Countries.map(({
-    Country,
-    Slug,
-    CountryCode,
-    NewConfirmed,
-    NewDeaths,
-    NewRecovered,
-    TotalConfirmed,
-    TotalDeaths,
-    TotalRecovered,
-  }) => {
-    const item = {};
-    item.country = Country;
-    item.slug = Slug;
-    item.countryCode = CountryCode;
-    item.newConfirmed = NewConfirmed;
-    item.newDeaths = NewDeaths;
-    item.newRecovered = NewRecovered;
-    item.totalConfirmed = TotalConfirmed;
-    item.totalDeaths = TotalDeaths;
-    item.totalRecovered = TotalRecovered;
+  countriesList = data.map((country) => {
+    const item = {
+      country: country.country,
+      flag: country.countryInfo.flag,
+      [param]: country[param],
+      population: country.population,
+    };
     return item;
   });
-  countriesList.sort(sortCountriesByParam(param));
-  handleRenderingAllCountriesList(countriesList, param, countriesDetails, isRelative);
+  handleRenderingAllCountriesList(countriesList, param, isRelative);
   return countriesList;
 };
 
