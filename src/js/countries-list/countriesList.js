@@ -4,6 +4,7 @@ const container = document.querySelector('.countries');
 const title = document.createElement('h4');
 title.innerText = 'Countries';
 const list = document.createElement('ul');
+list.classList.add('countries-list');
 const panel = buttonsPanel();
 container.append(title, list);
 container.insertAdjacentHTML('afterbegin', panel);
@@ -27,6 +28,7 @@ const handleRenderingAllCountriesList = (
     } else value = '-';
     const flagImg = item.flag || null;
     const countryContainer = document.createElement('li');
+    countryContainer.dataset.country = key;
     const keySpan = document.createElement('span');
     keySpan.innerText = key;
     const flagSpan = document.createElement('img');
