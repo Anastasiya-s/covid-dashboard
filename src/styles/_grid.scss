@@ -1,0 +1,44 @@
+.main-container {
+  background: #000;
+}
+
+.main {
+  display: grid;
+  grid-template-areas: 
+  "g g m m m m m da da da"
+  "g g m m m m m da da da"
+  "s s m m m m m da da da"
+  "c c m m m m m da da da"
+  "c c m m m m m da da da"
+  "c c m m m m m da da da"
+  "c c m m m m m di di di"
+  "c c m m m m m di di di"
+  "c c m m m m m di di di";
+  grid-column-gap: 1%;
+  grid-row-gap: 1%;
+  width: 100%;
+  max-width: 1400px;
+  height: 80vh;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.global-container {
+  grid-area: g;
+}
+
+.search-container {
+  grid-area: s;
+}
+.countries-container {
+  grid-area: c;
+}
+.map-container {
+  grid-area: m;
+}
+.data-container {
+  grid-area: da;
+}
+.diagram-container {
+  grid-area: di;
+}

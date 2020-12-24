@@ -1,0 +1,40 @@
+.footer {
+	width: 100%;
+	background: #2A0F5E;
+}
+
+.footer-container {
+	width: 100%;
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.footer-performer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+}
+
+.footer-name,
+.footer-link {
+	padding: 10px;
+	font-size: 20px;
+	text-decoration: none;
+	cursor: pointer;
+	color: #fff;
+}
+
+.school-logo {
+	width: 50px;
+}
+
+.footer-label a:hover {
+	color: rgba(255, 255, 255, 0.6);
+}
