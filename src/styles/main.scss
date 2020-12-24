@@ -1,38 +1,11 @@
+@import './normalize';
+@import './grid';
+@import './buttons';
+@import './header';
+@import './style.scss';
+@import './global';
+@import './search';
 @import './countries';
-
-.main {
-  display: grid;
-  grid-template-areas: 
-  "s s m m m m m da da da"
-  "c c m m m m m da da da"
-  "c c m m m m m da da da"
-  "c c m m m m m da da da"
-  "c c m m m m m di di di"
-  "c c m m m m m di di di"
-  "c c m m m m m di di di";
-  width: 100%;
-  min-height: 100vh;
-  background: white;
-}
-
-.search {
-  grid-area: s;
-  background-color: red;
-}
-.countries {
-  height: 700px;
-  grid-area: c;
-  overflow: scroll;
-}
-.map {
-  grid-area: m;
-  background-color: blue;
-}
-.data {
-  grid-area: da;
-  background-color: yellow;
-}
-.diagram {
-  grid-area: di;
-  background-color: grey;
-}
+@import './data';
+@import './diagram';
+@import './footer';
