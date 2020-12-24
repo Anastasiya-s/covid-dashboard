@@ -28,13 +28,16 @@ const handleRenderingAllCountriesList = (
     } else value = '-';
     const flagImg = item.flag || null;
     const countryContainer = document.createElement('li');
+    countryContainer.classList.add('countries-item');
     countryContainer.dataset.country = key;
     const keySpan = document.createElement('span');
+    keySpan.classList.add('country-name');
     keySpan.innerText = key;
     const flagSpan = document.createElement('img');
     flagSpan.classList.add('flag-icon');
     flagSpan.src = flagImg;
     const valueSpan = document.createElement('span');
+    valueSpan.classList.add('country-cases');
     valueSpan.innerText = value;
     if (flagImg) {
       countryContainer.append(keySpan, flagSpan, valueSpan);
