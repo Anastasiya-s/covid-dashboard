@@ -2,6 +2,7 @@ import '../styles/main.scss';
 
 import handleRenderingAllCountriesList from './countries-list/countriesList';
 import renderDetails from './details-table/details';
+import resize from './helpers/fullscreen';
 
 let countriesList = [];
 let countriesActiveProp = 'cases';
@@ -57,6 +58,7 @@ const fetchCountryData = async (c, t) => {
 document.addEventListener('DOMContentLoaded', () => {
   const dataParams = document.querySelectorAll('.data-panel');
   const countries = document.querySelectorAll('.countries-list');
+  const resizeButtons = document.querySelectorAll('.button-resize');
   fetchCountryData(currentCountry, detailsTime);
   handleFetchingData(countriesActiveProp);
   dataParams.forEach((item) => item.addEventListener('click', (e) => {
@@ -98,5 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
   dailyDetailsButton.addEventListener('click', () => {
     detailsTime = 'daily';
     fetchCountryData(currentCountry, detailsTime);
+  });
+  resizeButtons.forEach((button) => {
+    button.addEventListener('click', (e) => resize(e));
   });
 });
