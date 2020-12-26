@@ -1,6 +1,5 @@
 import '../styles/main.scss';
 import L from 'leaflet';
-// import 'leaflet/dist/leaflet.css';
 
 import handleRenderingAllCountriesList from './countries-list/countriesList';
 import renderDetails from './details-table/details';
@@ -81,6 +80,10 @@ const getMarkers = async () => {
     const marker = new L.Marker([country.countryInfo.lat, country.countryInfo.long], { icon });
     marker.addTo(map);
     marker.addEventListener('mouseover', () => { marker.bindPopup(`${country.country} ${country[mapProp]}`).openPopup(); });
+    marker.addEventListener('click', () => {
+      currentCountry = country.country;
+      fetchCountryData(country.country, detailsTime);
+    });
   });
 };
 
