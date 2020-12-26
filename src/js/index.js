@@ -1,7 +1,9 @@
 import '../styles/main.scss';
+import L from 'leaflet';
 
 import handleRenderingAllCountriesList from './countries-list/countriesList';
 import renderDetails from './details-table/details';
+import resize from './helpers/fullscreen';
 
 let countriesList = [];
 let countriesActiveProp = 'cases';
@@ -9,6 +11,7 @@ let isRelativeList = false;
 let currentCountry = 'global';
 let isRelativeDetails = false;
 let detailsTime = 'total';
+const mapProp = 'cases';
 
 const handleFetchingData = async (currentParam) => {
   const param = currentParam;
@@ -54,11 +57,45 @@ const fetchCountryData = async (c, t) => {
   renderDetails(currentCountry, d, isRelativeDetails);
 };
 
+// Map Leaflet
+
+const mapContainer = document.querySelector('.map');
+const mapOptions = {
+  center: [17.385044, 78.486671],
+  zoom: 2,
+};
+const map = L.map(mapContainer, mapOptions);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
+
+const getMarkers = async () => {
+  const response = await fetch(`https://disease.sh/v3/covid-19/countries?yesterday=true&sort=${mapProp}&allowNull=true`);
+  const data = await response.json();
+  const iconHtml = '<div class="map-pin"></div>';
+  data.forEach((country) => {
+    const icon = L.divIcon({
+      html: iconHtml,
+    });
+    const marker = new L.Marker([country.countryInfo.lat, country.countryInfo.long], { icon });
+    marker.addTo(map);
+    marker.addEventListener('mouseover', () => { marker.bindPopup(`${country.country} ${country[mapProp]}`).openPopup(); });
+    marker.addEventListener('click', () => {
+      currentCountry = country.country;
+      fetchCountryData(country.country, detailsTime);
+    });
+  });
+};
+
+// map end
+
 document.addEventListener('DOMContentLoaded', () => {
   const dataParams = document.querySelectorAll('.data-panel');
   const countries = document.querySelectorAll('.countries-list');
+  const resizeButtons = document.querySelectorAll('.button-resize');
   fetchCountryData(currentCountry, detailsTime);
   handleFetchingData(countriesActiveProp);
+  getMarkers(mapProp);
   dataParams.forEach((item) => item.addEventListener('click', (e) => {
     countriesActiveProp = e.target.dataset.info;
     handleFetchingData(countriesActiveProp);
@@ -98,5 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
   dailyDetailsButton.addEventListener('click', () => {
     detailsTime = 'daily';
     fetchCountryData(currentCountry, detailsTime);
+  });
+  resizeButtons.forEach((button) => {
+    button.addEventListener('click', (e) => resize(e));
   });
 });
