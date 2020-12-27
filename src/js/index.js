@@ -4,6 +4,7 @@ import L from 'leaflet';
 import handleRenderingAllCountriesList from './countries-list/countriesList';
 import renderDetails from './details-table/details';
 import resize from './helpers/fullscreen';
+import drawDiagram from './diagram/diagram';
 
 let countriesList = [];
 let countriesActiveProp = 'cases';
@@ -96,14 +97,19 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchCountryData(currentCountry, detailsTime);
   handleFetchingData(countriesActiveProp);
   getMarkers(mapProp);
+  drawDiagram(currentCountry, countriesActiveProp);
   dataParams.forEach((item) => item.addEventListener('click', (e) => {
     countriesActiveProp = e.target.dataset.info;
     handleFetchingData(countriesActiveProp);
+    if (countriesActiveProp === 'cases' || countriesActiveProp === 'deaths' || countriesActiveProp === 'recovered') {
+      drawDiagram(currentCountry, countriesActiveProp);
+    }
   }));
   countries.forEach((item) => {
     item.addEventListener('click', (e) => {
       currentCountry = e.target.dataset.country || e.target.parentNode.dataset.country;
       fetchCountryData(currentCountry, detailsTime);
+      drawDiagram(currentCountry, countriesActiveProp);
     });
   });
   const relativeButton = document.querySelector('.relative');

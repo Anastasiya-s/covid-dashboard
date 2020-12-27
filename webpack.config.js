@@ -69,4 +69,7 @@ module.exports = {
     port: 8080,
     headers: { 'Access-Control-Allow-Origin': '*' },
   },
+  externals: {
+    moment: 'moment',
+}
 };
