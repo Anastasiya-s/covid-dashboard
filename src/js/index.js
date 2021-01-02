@@ -5,6 +5,7 @@ import handleRenderingAllCountriesList from './countries-list/countriesList';
 import renderDetails from './details-table/details';
 import resize from './helpers/fullscreen';
 import drawDiagram from './diagram/diagram';
+import handleSearch from './search-panel/search-panel';
 
 let countriesList = [];
 let countriesActiveProp = 'cases';
@@ -94,6 +95,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const dataParams = document.querySelectorAll('.data-panel');
   const countries = document.querySelectorAll('.countries-list');
   const resizeButtons = document.querySelectorAll('.button-resize');
+  const searchBar = document.getElementById('search');
+  searchBar.addEventListener('keyup', (e) => {
+    const char = e.key;
+    console.log(char);
+    handleSearch(char);
+  });
   fetchCountryData(currentCountry, detailsTime);
   handleFetchingData(countriesActiveProp);
   getMarkers(mapProp);
