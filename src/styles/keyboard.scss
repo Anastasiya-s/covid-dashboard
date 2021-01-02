@@ -1,0 +1,112 @@
+.keyboard-toggler {
+  font-size: 1.4rem;
+  background: transparent;
+  outline-style: none;
+  border-style: none;
+  cursor: pointer;
+}
+
+.keyboard_container {
+  width: 100%;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 0;
+  border: 2px solid #ccc;
+  background-color: #e9cbcb;
+}
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  margin: 0.5rem 1rem;
+  padding: 0;
+}
+
+.cell.blur {
+  background-color: palevioletred;
+  -webkit-box-shadow: 0 0 5px orchid,
+ 2px 2px 2px orchid;
+          box-shadow: 0 0 5px orchid,
+ 2px 2px 2px orchid;
+}
+
+.cell {
+  margin: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  background: seashell;
+  text-align: center;
+  transition: background-color 0.5s;
+  
+}
+
+@media screen and (max-width: 930px) {
+  .cell{
+    margin: 0.3rem;
+    padding: 1rem 1.2rem;
+    font-size: 1.7rem;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .cell{
+    margin: 0.2rem;
+    padding: 0.5em;
+    font-size: 1.4rem;
+  }
+}
+
+.cell:first-child, .cell:last-child {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.cell:hover {
+  cursor: pointer;
+  background-color: palevioletred;
+  -webkit-box-shadow: 
+    0 0 5px orchid,
+    2px 2px 2px orchid;
+  box-shadow: 
+    0 0 5px orchid,
+    2px 2px 2px orchid;
+  }
+
+.cell:active {
+  cursor: pointer;
+  background-color: plum;
+  -webkit-box-shadow: 
+    0 0 5px orchid,
+    inset 0 0 2px black;
+  box-shadow: 
+    0 0 5px orchid,
+    inset 0 0 2px black;
+}
+
+.active {
+  cursor: pointer;
+  background-color: plum;
+  -webkit-box-shadow: 
+    0 0 5px orchid,
+    inset 0 0 2px black;
+  box-shadow: 
+    0 0 5px orchid,
+    inset 0 0 2px black;
+}
+
+.Space {
+  width: 40%;
+}
+
+.Sound {
+  /* width: 2rem;
+  height: 2rem; */
+}
