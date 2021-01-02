@@ -6,6 +6,33 @@ import renderDetails from './details-table/details';
 import resize from './helpers/fullscreen';
 import drawDiagram from './diagram/diagram';
 import handleSearch from './search-panel/search-panel';
+import Keyboard from './keyboard/Keyboard';
+import {
+  handleSpecialKeys,
+  addSymbol,
+  // removeSymbol,
+  audio,
+} from './keyboard/helpers';
+
+const keyboard = new Keyboard();
+const specialKeysCode = [
+  'Backquote',
+  'Backspace',
+  'Tab',
+  'CapsLock',
+  'ShiftRight',
+  'ShiftLeft',
+  'ControlLeft',
+  'ControlRight',
+  'AltLeft',
+  'AltRight',
+  'Space',
+  'Enter',
+  'Menu',
+  'Backspace',
+  'ChangeLang',
+  'Sound',
+];
 
 let countriesList = [];
 let countriesActiveProp = 'cases';
@@ -95,6 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const dataParams = document.querySelectorAll('.data-panel');
   const countries = document.querySelectorAll('.countries-list');
   const resizeButtons = document.querySelectorAll('.button-resize');
+  const keyboardOpenButton = document.querySelector('.keyboard-toggler');
+  const textArea = document.querySelector('.search-input');
+  const keyboardContainer = document.querySelector('.keyboard-container');
   const searchBar = document.getElementById('search');
   searchBar.addEventListener('keyup', (e) => {
     const char = e.key;
@@ -152,4 +182,68 @@ document.addEventListener('DOMContentLoaded', () => {
   resizeButtons.forEach((button) => {
     button.addEventListener('click', (e) => resize(e));
   });
+
+  // keyboard
+
+  keyboardOpenButton.addEventListener('click', () => {
+    if (keyboard.isOpen) {
+      while (keyboardContainer.firstChild) {
+        keyboardContainer.removeChild(keyboardContainer.firstChild);
+      }
+      keyboard.isOpen = false;
+      keyboardOpenButton.innerText = 'Open keyboard';
+      textArea.focus();
+    } else {
+      keyboard.init();
+      keyboardOpenButton.innerText = 'Close keyboard';
+      textArea.focus();
+    }
+  });
+
+  keyboardContainer.addEventListener('click', (e) => {
+    const { keyCode } = e.target.dataset;
+    const { lang } = keyboard;
+    const audioFilePath = `./assets/sounds/key_${lang}.mp3`;
+    audio.src = audioFilePath;
+    if (!keyCode) {
+      return;
+    }
+    if (specialKeysCode.includes(keyCode)) {
+      handleSpecialKeys(keyCode, keyboard);
+    } else {
+      addSymbol(keyCode, keyboard, textArea);
+      if (keyboard.isShiftPressed) {
+        keyboard.isShiftPressed = false;
+        keyboard.changeKeyboardLayout();
+      }
+    }
+    if (keyboard.isSoundOn) audio.play();
+    textArea.focus();
+    textArea.selectionStart = textArea.value.length;
+  });
+
+  // document.addEventListener('keydown', (e) => {
+  //   const keyCode = e.code;
+  //   const button = document.querySelector(`.${keyCode}`);
+  //   if (button) {
+  //     if (keyCode === 'CapsLock') {
+  //       button.classList.toggle('active');
+  //     }
+  //     button.classList.add('blur');
+  //   }
+  // });
+
+  // document.addEventListener('keyup', (e) => {
+  //   const keyCode = e.code;
+  //   const button = document.querySelector(`.${keyCode}`);
+  //   button.classList.remove('blur');
+  //   textArea.focus();
+  //   textArea.selectionStart = textArea.value.length;
+  // });
+
+  // textArea.addEventListener('click', (e) => {
+  //   textArea.setSelectionRange(e.offsetX, e.offsetX);
+  // });
+
+  // keyboard end
 });
