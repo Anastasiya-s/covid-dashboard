@@ -5,6 +5,7 @@ import handleRenderingAllCountriesList from './countries-list/countriesList';
 import renderDetails from './details-table/details';
 import resize from './helpers/fullscreen';
 import drawDiagram from './diagram/diagram';
+import handleSearch from './search-panel/search-panel';
 import Keyboard from './keyboard/Keyboard';
 import {
   handleSpecialKeys,
@@ -124,7 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const keyboardOpenButton = document.querySelector('.keyboard-toggler');
   const textArea = document.querySelector('.search-input');
   const keyboardContainer = document.querySelector('.keyboard-container');
-
+  const searchBar = document.getElementById('search');
+  searchBar.addEventListener('keyup', (e) => {
+    const char = e.key;
+    console.log(char);
+    handleSearch(char);
+  });
   fetchCountryData(currentCountry, detailsTime);
   handleFetchingData(countriesActiveProp);
   getMarkers(mapProp);
