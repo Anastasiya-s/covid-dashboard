@@ -1,8 +1,7 @@
 const handleSearch = () => {
-  const input = document.getElementById('search');
+  const input = document.querySelector('.search-input');
   const searchQuery = input.value.toLowerCase();
   const options = document.querySelectorAll('.countries-item');
-
   options.forEach((option) => {
     const item = option;
     if (option.dataset.country.toLowerCase().indexOf(searchQuery) > -1) {

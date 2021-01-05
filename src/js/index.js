@@ -125,10 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const keyboardOpenButton = document.querySelector('.keyboard-toggler');
   const textArea = document.querySelector('.search-input');
   const keyboardContainer = document.querySelector('.keyboard-container');
-  const searchBar = document.getElementById('search');
+  const searchBar = document.querySelector('.search-input');
   searchBar.addEventListener('keyup', (e) => {
     const char = e.key;
-    console.log(char);
     handleSearch(char);
   });
   fetchCountryData(currentCountry, detailsTime);
@@ -216,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         keyboard.isShiftPressed = false;
         keyboard.changeKeyboardLayout();
       }
+      handleSearch(keyCode);
     }
     if (keyboard.isSoundOn) audio.play();
     textArea.focus();
