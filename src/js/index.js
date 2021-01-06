@@ -204,16 +204,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // keyboard
 
   keyboardOpenButton.addEventListener('click', () => {
+    const span = document.querySelector('.button-text');
     if (keyboard.isOpen) {
       while (keyboardContainer.firstChild) {
         keyboardContainer.removeChild(keyboardContainer.firstChild);
       }
       keyboard.isOpen = false;
-      keyboardOpenButton.innerText = 'Open keyboard';
+      span.innerText = 'Open keyboard';
       textArea.focus();
     } else {
       keyboard.init();
-      keyboardOpenButton.innerText = 'Close keyboard';
+      span.innerText = 'Close keyboard';
       textArea.focus();
     }
   });
