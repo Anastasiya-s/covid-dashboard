@@ -6,7 +6,7 @@
 
 .countries {
   height: 550px;
-  margin-top: 70px;
+  margin-top: 140px;
  	overflow-y: scroll;
 }
 
@@ -42,7 +42,7 @@
 
 .panel-wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .panel-label {
