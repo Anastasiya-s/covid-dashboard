@@ -5,15 +5,15 @@
 .main {
   display: grid;
   grid-template-areas: 
-  "g g m m m m m da da da"
-  "g g m m m m m da da da"
-  "s s m m m m m da da da"
-  "c c m m m m m da da da"
-  "c c m m m m m da da da"
-  "c c m m m m m da da da"
-  "c c m m m m m di di di"
-  "c c m m m m m di di di"
-  "c c m m m m m di di di";
+  "g m da"
+  "s m da"
+  "c m da"
+  "c m da"
+  "c m di"
+  "c m di"
+  "c m di"
+  "c m di";
+  grid-template-columns: 20% 50% 30%;
   grid-column-gap: 1%;
   grid-row-gap: 1%;
   width: 100%;
