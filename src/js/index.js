@@ -83,7 +83,7 @@ const fetchCountryData = async (c, t) => {
       population: data.population,
     };
   }
-  renderDetails(currentCountry, d, isRelativeDetails);
+  renderDetails(country, d, isRelativeDetails);
 };
 
 // Map Leaflet
@@ -116,6 +116,20 @@ const getMarkers = async () => {
   });
 };
 
+const handleSearchSubmit = (v) => {
+  const value = v;
+  const options = document.querySelectorAll('.countries-item');
+  const searchBar = document.querySelector('.search-input');
+  options.forEach((option) => {
+    const item = option;
+    if (option.dataset.country.toLowerCase() === value) {
+      fetchCountryData(value, 'total');
+      searchBar.value = '';
+    }
+    item.style.display = 'flex';
+  });
+};
+
 // map end
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -125,10 +139,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const keyboardOpenButton = document.querySelector('.keyboard-toggler');
   const textArea = document.querySelector('.search-input');
   const keyboardContainer = document.querySelector('.keyboard-container');
-  const searchBar = document.getElementById('search');
+  const searchBar = document.querySelector('.search-input');
+  const submitButton = document.querySelector('.search-submit');
+  submitButton.addEventListener('click', () => {
+    const c = searchBar.value;
+    handleSearchSubmit(c);
+  });
   searchBar.addEventListener('keyup', (e) => {
     const char = e.key;
-    console.log(char);
     handleSearch(char);
   });
   fetchCountryData(currentCountry, detailsTime);
@@ -216,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         keyboard.isShiftPressed = false;
         keyboard.changeKeyboardLayout();
       }
+      handleSearch(keyCode);
     }
     if (keyboard.isSoundOn) audio.play();
     textArea.focus();
