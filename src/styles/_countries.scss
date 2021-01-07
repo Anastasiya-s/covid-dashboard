@@ -7,7 +7,11 @@
 .countries {
   height: 550px;
   margin-top: 140px;
- 	overflow-y: scroll;
+}
+
+.countries-list {
+  height: 330px;
+  overflow-y: scroll;
 }
 
 .countries-item {

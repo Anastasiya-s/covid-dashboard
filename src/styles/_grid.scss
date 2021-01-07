@@ -8,19 +8,43 @@
   grid-template-areas: 
   "g m da"
   "s m da"
-  "c m da"
-  "c m da"
   "c m di"
-  "c m di"
-  "c m di"
-  "c m di";
-  grid-template-columns: 20% 50% 30%;
+  "c m .";
+  grid-template-columns: 2fr 4fr 3fr;
+  grid-template-rows: 1fr 50px repeat(2, 2fr);
   grid-column-gap: 1%;
   grid-row-gap: 1%;
   width: 100%;
   max-width: 1400px;
-  height: 80vh;
+  height: 75vh;
   margin: 0 auto;
+
+  @media screen and (max-width: 1400px) {
+    grid-template-areas: 
+    "g da di"
+    "s da di"
+    "c m m"
+    "c m m";
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 50px repeat(2, 2fr);
+  }
+  @media screen and (max-width: 900px) {
+    grid-template-areas: 
+    "g da"
+    "s da"
+    "c di"
+    "c di"
+    "c m"
+    "c m"
+    "c m";
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 50px repeat(5, 1fr);
+  }
+  @media screen and (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
 }
 
 .global-container {
@@ -30,15 +54,22 @@
 .search-container {
   grid-area: s;
 }
+
 .countries-container {
   grid-area: c;
 }
+
 .map-container {
   grid-area: m;
 }
+
 .data-container {
   grid-area: da;
 }
+
 .diagram-container {
   grid-area: di;
+  @media screen and (max-width: 700px) {
+    width: 50%;
+  }
 }
