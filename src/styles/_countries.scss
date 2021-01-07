@@ -6,8 +6,12 @@
 
 .countries {
   height: 550px;
-  margin-top: 70px;
- 	overflow-y: scroll;
+  margin-top: 140px;
+}
+
+.countries-list {
+  height: 330px;
+  overflow-y: scroll;
 }
 
 .countries-item {
@@ -42,7 +46,7 @@
 
 .panel-wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .panel-label {

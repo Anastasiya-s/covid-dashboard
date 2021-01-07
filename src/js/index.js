@@ -142,8 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchBar = document.querySelector('.search-input');
   const submitButton = document.querySelector('.search-submit');
   submitButton.addEventListener('click', () => {
+    const span = document.querySelector('.button-text');
     const c = searchBar.value;
     handleSearchSubmit(c);
+    while (keyboardContainer.firstChild) {
+      keyboardContainer.removeChild(keyboardContainer.firstChild);
+    }
+    keyboard.isOpen = false;
+    span.innerText = 'Open keyboard';
   });
   searchBar.addEventListener('keyup', (e) => {
     const char = e.key;
@@ -204,16 +210,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // keyboard
 
   keyboardOpenButton.addEventListener('click', () => {
+    const span = document.querySelector('.button-text');
     if (keyboard.isOpen) {
       while (keyboardContainer.firstChild) {
         keyboardContainer.removeChild(keyboardContainer.firstChild);
       }
       keyboard.isOpen = false;
-      keyboardOpenButton.innerText = 'Open keyboard';
+      span.innerText = 'Open keyboard';
       textArea.focus();
     } else {
       keyboard.init();
-      keyboardOpenButton.innerText = 'Close keyboard';
+      span.innerText = 'Close keyboard';
       textArea.focus();
     }
   });
