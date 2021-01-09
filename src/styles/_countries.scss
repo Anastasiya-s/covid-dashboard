@@ -1,0 +1,59 @@
+.countries-container {
+	position: relative;
+	background: rgb(35, 35, 45);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.countries {
+  height: 550px;
+  margin-top: 140px;
+}
+
+.countries-list {
+  height: 330px;
+  overflow-y: scroll;
+}
+
+.countries-item {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 0 10px;
+  cursor: pointer;
+  &:hover {
+	background: rgba(5, 35, 45, 0.9);
+  }
+}
+
+.country-cases {
+	margin-left: 3%;
+	color: rgb(230, 0, 0);
+}
+
+.country-name {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.flag-icon {
+  width: 30px;
+}
+
+.countries-nav {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.panel-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-label {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.data-panel {
+  display: flex;
+  flex-flow: row nowrap;
+}

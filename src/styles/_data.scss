@@ -1,0 +1,22 @@
+.data-container {
+	position: relative;
+	background: rgb(35, 35, 45);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px;
+}
+
+.data-country {
+  text-transform: uppercase;
+}
+
+.details-nav {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.data-details {
+  margin: 10px auto;
+}
